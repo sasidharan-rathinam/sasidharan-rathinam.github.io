@@ -166,8 +166,6 @@ pre {
 }
 
 .prose pre {
-  background: #1e293b;
-  color: #f8fafc;
   padding: 1.5rem;
   border-radius: 12px;
   overflow-x: auto;
@@ -180,7 +178,7 @@ pre {
   color: inherit;
   padding: 0;
   white-space: pre;
-  font-size: 0.95em;
+  font-size: 0.85em;
 }
 
 /* Links */
@@ -371,18 +369,26 @@ pre {
   flex-grow: 1;
 }
 
+.tag {
+  display: inline-block;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .project-content .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: auto;
-}
-
-.project-content .tag {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
 }

@@ -1,39 +1,56 @@
-{
-    "Data Engineering": [
-        "ETL / ELT Pipelines",
-        "Batch & Streaming Processing",
-        "Data Modeling (OLTP, OLAP, Star/Snowflake)",
-        "Bronze-Silver-Gold Architecture"
-    ],
-    "Databases & Storage": [
-        "PostgreSQL",
-        "MySQL",
-        "BigQuery",
-        "Redshift",
-        "Snowflake",
-        "AWS S3",
-        "Google Cloud Storage",
-        "Data Lakes111222"
-    ],
-    "Big Data & Processing": [
-        "Apache Spark",
-        "Apache Airflow",
-        "AWS Glue",
-        "dbt (Data Build Tool)",
-        "Kafka"
-    ],
-    "Cloud & DevOps": [
-        "AWS (Lambda, EMR, Redshift, Glue)",
-        "GCP (BigQuery, Dataflow, Cloud Composer)",
-        "Docker",
-        "CI/CD (GitHub Actions, GitLab CI)",
-        "Terraform",
-        "IAM & Security"
-    ],
-    "Languages": [
-        "Python (Expert)",
-        "SQL (Expert)",
-        "Scala",
-        "Shell Scripting"
-    ]
-}
+[
+    {
+        "category": "Data Engineering",
+        "order": 1,
+        "items": [
+            "ETL / ELT Pipelines",
+            "Batch & Streaming Processing",
+            "Data Modeling (OLTP, OLAP, Star/Snowflake)",
+            "Bronze-Silver-Gold Architecture"
+        ]
+    },
+    {
+        "category": "Databases & Storage",
+        "order": 2,
+        "items": [
+            "PostgreSQL",
+            "MySQL",
+            "Redshift",
+            "Snowflake",
+            "AWS S3",
+            "Google Cloud Storage",
+            "Data Lakes"
+        ]
+    },
+    {
+        "category": "Big Data & Processing",
+        "order": 3,
+        "items": [
+            "Apache Spark",
+            "AWS Glue",
+            "dbt (Data Build Tool)",
+            "Kafka"
+        ]
+    },
+    {
+        "category": "Cloud & DevOps",
+        "order": 4,
+        "items": [
+            "AWS (Lambda, EMR, Redshift, Glue)",
+            "Docker",
+            "CI/CD (GitHub Actions",
+            "Terraform",
+            "IAM & Security"
+        ]
+    },
+    {
+        "category": "Languages",
+        "order": 5,
+        "items": [
+            "Python (Expert)",
+            "SQL (Expert)",
+            "Shell Scripting",
+            "Java"
+        ]
+    }
+]

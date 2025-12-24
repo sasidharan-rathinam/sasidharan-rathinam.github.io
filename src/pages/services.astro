@@ -2,9 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import servicesData from '../data/services.json';
 import siteData from '../data/site.json';
+import themeData from '../data/theme.json';
 
 const pageTitle = `Services & Consulting | ${siteData.name}`;
 const { intro, services, engagement_models } = servicesData;
+
+// Sort services by order
+const sortedServices = services.sort((a, b) => (a.order || 999) - (b.order || 999));
 ---
 
 <BaseLayout title={pageTitle}>
@@ -14,11 +18,18 @@ const { intro, services, engagement_models } = servicesData;
       {intro}
     </p>
 
-    <div class="services-grid">
-      {services.map(service => (
+    <div class="services-grid" style={`grid-template-columns: repeat(${themeData.layout.grid?.serviceColumns || 3}, 1fr);`}>
+      {sortedServices.map(service => (
           <div class="service-card">
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            {service.points && (
+                <ul class="service-points">
+                    {service.points.map(point => (
+                        <li>{point}</li>
+                    ))}
+                </ul>
+            )}
           </div>
       ))}
     </div>
@@ -50,7 +61,7 @@ const { intro, services, engagement_models } = servicesData;
   }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-template-columns handled inline for configuration */
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
   }
@@ -63,6 +74,25 @@ const { intro, services, engagement_models } = servicesData;
   .service-card h3 {
     color: var(--color-accent);
     margin-top: 0;
+  }
+  .service-points {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-md);
+  }
+  .service-points li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+  .service-points li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
   }
   .engagement-grid {
     display: grid;

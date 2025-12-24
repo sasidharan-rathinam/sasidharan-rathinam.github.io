@@ -1,10 +1,16 @@
 ---
 import siteData from '../data/site.json';
 ---
-<header>
+<header id="main-header">
   <nav class="container nav-content">
     <a href="/" class="logo">{siteData.name}</a>
-    <div class="nav-links">
+    
+    <button id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+      <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="nav-links" id="nav-links">
       <a href="/">Home</a>
       <a href="/skills">Skills</a>
       <a href="/projects">Projects</a>
@@ -15,50 +21,155 @@ import siteData from '../data/site.json';
   </nav>
 </header>
 
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  const header = document.getElementById('main-header');
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+      navLinks.classList.toggle('is-open');
+      menuToggle.classList.toggle('is-active');
+      
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        menuToggle.classList.remove('is-active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>
+
 <style>
   header {
     padding: var(--space-md) 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--color-bg); /* Ensure content doesn't show behind */
-    /* Optional: minimal backdrop blur for modern feel */
-    backdrop-filter: blur(8px);
-    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for light mode */
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
   }
+
   @media (prefers-color-scheme: dark) {
     header {
-      background-color: rgba(15, 23, 42, 0.9); /* Slight transparency for dark mode */
+      background: rgba(15, 23, 42, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Even subtler in dark mode */
     }
   }
+
   .nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   .logo {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--color-text-main);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    z-index: 1001; /* Above mobile menu */
   }
+
   .nav-links {
     display: flex;
-    gap: var(--space-md);
+    gap: var(--space-lg);
+    align-items: center;
   }
+
   .nav-links a {
     color: var(--color-text-muted);
     font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 0.5rem 0;
+    position: relative;
   }
+
   .nav-links a:hover {
     color: var(--color-accent);
-    text-decoration: none;
   }
-  /* Mobile responsiveness can be improved later */
-  @media (max-width: 640px) {
-    .nav-content {
+  
+  /* Active link indicator effect */
+  .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-accent);
+      transition: width 0.2s ease;
+  }
+  .nav-links a:hover::after {
+      width: 100%;
+  }
+
+  /* Text color for headings or logo might need specific tweaking in global, but here we invoke variables */
+
+  /* Mobile Menu Toggle */
+  #menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--color-text-main);
+    z-index: 1001;
+  }
+  
+  .icon-close { display: none; }
+  #menu-toggle.is-active .icon-menu { display: none; }
+  #menu-toggle.is-active .icon-close { display: block; }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 768px) { /* Increased breakpoint for tablets */
+    #menu-toggle {
+      display: block;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--color-bg);
       flex-direction: column;
-      gap: var(--space-md);
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 0;
+      pointer-events: none; /* Prevent clicking when hidden */
+      padding-top: 4rem; /* Spacing for close button */
+    }
+
+    .nav-links.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-links a {
+      font-size: 1.5rem;
+      font-weight: 600;
     }
   }
 </style>

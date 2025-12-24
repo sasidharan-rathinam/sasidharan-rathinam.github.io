@@ -1,8 +1,8 @@
 {
     "hero": {
         "title": "Hi, I'm Sasidharan Rathinam.",
-        "subtitle": "Senior Data Engineer & Freelance Consultant",
-        "description": "Building scalable data pipelines and analytics platforms for startups and data-driven businesses. I turn complex data challenges into reliable, high-performance solutions.",
+        "subtitle": "Data Expert & Freelance Consultant",
+        "description": "Experienced data expert specializing in scalable data pipelines, analytics platforms, and performance-driven data architectures for startups and growing businesses.",
         "cta_primary": {
             "text": "Contact",
             "url": "/contact"
@@ -15,11 +15,11 @@
     "summary": [
         {
             "title": "9+ Years",
-            "text": "Experience in Data Engineering & Analytics"
+            "text": "Experience in Data Field"
         },
         {
             "title": "Cloud Native",
-            "text": "Expert in AWS, GCP, and Modern Data Stack"
+            "text": "Expert in AWS, and Modern Data Stack"
         },
         {
             "title": "High Impact",
@@ -31,8 +31,8 @@
         "description": "I specialize in designing and building robust data infrastructures. From setting up your first data warehouse to optimizing complex ETL pipelines processing terabytes of data, I help businesses unlock the true value of their data.",
         "items": [
             "ELT/ETL Pipeline Development",
-            "Data Warehouse Architecture (Snowflake, BigQuery, Redshift)",
-            "Data Lake Implementation",
+            "Data Warehouse Architecture (Snowflake, Redshift)",
+            "Data Lakehouse Implementation",
             "Performance Tuning & Cost Optimization"
         ],
         "link": {
@@ -43,7 +43,7 @@
     "projects_section": {
         "title": "Featured Projects",
         "featured_slugs": [
-            "migration-case-study"
+            "s3-cost-optimization-case-study"
         ],
         "link": {
             "text": "View all projects \u2192",
@@ -68,7 +68,7 @@
             "SQL",
             "AWS",
             "Snowflake",
-            "Data Engineering",
+            "Data Lakehouse",
             "ETL/ELT"
         ],
         "link": {

@@ -3,19 +3,43 @@
     "services": [
         {
             "title": "Data Pipeline Design",
-            "description": "End-to-end design and implementation of robust ETL/ELT pipelines using tools like Airflow, dbt, and Spark. I ensure data quality, reliability, and observability are built-in from day one."
+            "order": 1,
+            "description": "End-to-end design and implementation of robust ETL/ELT pipelines tailored to your business needs.",
+            "points": [
+                "Stack: Airflow, dbt, Spark",
+                "Built-in data quality & reliability",
+                "Full pipeline observability"
+            ]
         },
         {
             "title": "Analytics Platform Setup",
-            "description": "Setting up modern data warehouses (Snowflake, BigQuery, Redshift) and BI tools to empower your team with actionable insights. From data ingestion to dashboarding."
+            "order": 2,
+            "description": "Setting up modern data warehouses and BI tools to empower your team with actionable insights.",
+            "points": [
+                "Warehouses: Snowflake, BigQuery, Redshift",
+                "From Ingestion to Dashboarding",
+                "Self-service BI setup"
+            ]
         },
         {
             "title": "Performance Optimization",
-            "description": "Auditing and tuning slow queries and expensive data jobs. I help reduce cloud costs and improve data delivery SLAs, often achieving 30-50% cost reductions."
+            "order": 3,
+            "description": "Auditing and tuning slow queries and expensive data jobs to boost efficiency and reduce waste.",
+            "points": [
+                "Reduce cloud costs by 30-50%",
+                "Improve data delivery SLAs",
+                "Query & Job Tuning"
+            ]
         },
         {
             "title": "Cloud Migration",
-            "description": "Seamlessly migrating on-premise databases or legacy systems to the cloud (AWS/GCP). Zero-downtime strategies and secure data transfer protocols."
+            "order": 4,
+            "description": "Seamlessly migrating on-premise databases or legacy systems to the cloud (AWS/GCP).",
+            "points": [
+                "Zero-downtime strategies",
+                "Secure data transfer protocols",
+                "Legacy system modernization"
+            ]
         }
     ],
     "engagement_models": [

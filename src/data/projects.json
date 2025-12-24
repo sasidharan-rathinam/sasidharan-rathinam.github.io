@@ -1,24 +1,25 @@
 [
     {
-        "slug": "migration-case-study",
-        "title": "Enterprise Data Warehouse Migration to Snowflake",
-        "description": "Migrating a 50TB on-premise Oracle data warehouse to Snowflake, reducing query times by 60%.",
-        "pubDate": "2024-06-15",
+        "slug": "s3-cost-optimization-case-study",
+        "title": "AWS S3 Storage and Request Cost Optimization",
+        "description": "Reduced AWS S3 monthly costs from $25,000 to $3,000 by fixing misconfigured bucket logging and enforcing lifecycle policies.",
+        "pubDate": "2024-08-10",
+        "order": 1,
         "tags": [
-            "Snowflake",
-            "dbt",
-            "Airflow",
-            "Migration"
+            "AWS S3",
+            "Cost Optimization",
+            "Lifecycle Policies",
+            "Cloud Operations"
         ],
-        "company": "FinTech Startup",
-        "role": "Lead Data Engineer",
+        "company": "Banking Company",
+        "role": "Senior Consultant",
         "sections": [
             {
                 "title": "Problem Statement",
                 "content": [
                     {
                         "type": "text",
-                        "value": "The client was operating a legacy on-premise Oracle data warehouse that was becoming increasingly expensive to maintain. Query performance was degrading as data volume grew to over 50TB, and the business users were experiencing significant delays in their daily reporting."
+                        "value": "The client was facing an unexpectedly high AWS bill of nearly `$25,000` per month, primarily driven by Amazon S3 storage and request charges. The increase was not aligned with application growth, indicating inefficiencies in how log data was being stored and managed."
                     }
                 ]
             },
@@ -27,7 +28,7 @@
                 "content": [
                     {
                         "type": "text",
-                        "value": "*   **Sector:** Financial Technology\n*   **Scale:** 50TB+ Historical Data, 200GB Daily Ingestion\n*   **Goal:** Modernize the data stack to support real-time analytics and reduce TCO (Total Cost of Ownership)."
+                        "value": "*   **Sector:** Banking\n*   **Scale:** High-volume log ingestion across multiple S3 buckets\n*   **Goal:** Bring AWS S3 costs under control while maintaining required log retention and auditability."
                     }
                 ]
             },
@@ -36,7 +37,7 @@
                 "content": [
                     {
                         "type": "text",
-                        "value": "We designed a modern lakehouse architecture:\n1.  **Ingestion:** AWS DMS for initial load and CDC (Change Data Capture) for ongoing replication to S3.\n2.  **Processing:** Apache Airflow to orchestrate data loading from S3 to Snowflake.\n3.  **Transformation:** dbt (data build tool) for modeling data into raw (Bronze), cleansed (Silver), and business-ready (Gold) layers."
+                        "value": "The platform relied heavily on S3 for centralized log storage:\n1.  **Log Sources:** Application logs, load balancer access logs, and service logs continuously written to S3.\n2.  **Storage Layer:** Multiple large S3 buckets with server access logging enabled.\n3.  **Governance:** No effective lifecycle or retention enforcement."
                     }
                 ]
             },
@@ -45,7 +46,7 @@
                 "content": [
                     {
                         "type": "text",
-                        "value": "*   **Data Quality:** Legacy data had significant inconsistences that required complex cleaning logic during the Silver layer transformation.\n*   **Downtime:** The migration needed to happen with near-zero downtime for the reporting team.\n*   **Cost Control:** Initial compute costs on Snowflake were high due to unoptimized queries."
+                        "value": "*   **Runaway Costs:** Monthly S3 spend had grown to `~$25k` due to unbounded log retention.\n*   **Request Amplification:** Misconfigured S3 server access logging caused recursive logging, dramatically increasing PUT and GET requests.\n*   **Low Visibility:** Cost drivers were spread across multiple buckets and prefixes, making root-cause analysis non-trivial."
                     }
                 ]
             },
@@ -54,7 +55,69 @@
                 "content": [
                     {
                         "type": "text",
-                        "value": "We implemented a phased migration approach.\n*   **Performance:** Reporting query reduction from 45 minutes to <2 minutes.\n*   **Scalability:** The new architecture handles peak loads automatically without manual intervention.\n*   **Cost:** Reduced operational costs by 40% compared to the on-premise licensing and maintenance fees.\n\n> \"Sasi's expertise in Snowflake and dbt was crucial for this migration. He not only moved our data but completely revitalized how we use it.\" - *CTO, Client Company*"
+                        "value": "A focused S3 cost-reduction initiative was executed.\n*   **Lifecycle Enforcement:** Verified and corrected lifecycle policies to transition older logs to Glacier and expire data beyond compliance needs.\n*   **Logging Optimization:** Identified and fixed bucket logging configurations that were logging high-traffic buckets into themselves or other hot buckets.\n*   **Cost Monitoring:** Introduced bucket-level cost visibility to prevent future regressions.\n\n**Results:**\n*   **Monthly Cost:** Reduced AWS S3 spend from **`$25,000/month` to `$3,000/month`** (`~88%` reduction).\n*   **Storage:** Eliminated large volumes of redundant and stale log data.\n*   **Requests:** Massive drop in S3 PUT/GET request volume after correcting logging behavior.\n*   **Reliability:** No impact to production workloads, compliance, or observability."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "aws-glue-pyspark-cost-optimization",
+        "title": "AWS Glue PySpark Job Cost Optimization",
+        "description": "Reduced AWS Glue job costs by refactoring inefficient PySpark code, enabling jobs to run on G.1X instead of G.8X with the same data volume.",
+        "pubDate": "2024-09-05",
+        "order": 2,
+        "tags": [
+            "AWS Glue",
+            "PySpark",
+            "Cost Optimization",
+            "Big Data"
+        ],
+        "company": "Banking Company",
+        "role": "Senior Consultant",
+        "sections": [
+            {
+                "title": "Problem Statement",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "The client was experiencing unusually high AWS Glue costs for multiple PySpark jobs. Despite processing datasets of less than one million records, several jobs required **`G.8X`** workers to complete successfully, significantly increasing operational expenses."
+                    }
+                ]
+            },
+            {
+                "title": "Business Context",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "*   **Sector:** Banking\n*   **Scale:** < 1 million records per job\n*   **Goal:** Reduce AWS Glue execution costs without compromising job reliability or SLAs."
+                    }
+                ]
+            },
+            {
+                "title": "Architecture",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "The data processing pipeline used AWS Glue for ETL workloads:\n1.  **Ingestion:** Source data loaded from S3 into Glue PySpark jobs.\n2.  **Processing:** Multiple transformations and validations implemented in PySpark.\n3.  **Execution:** Glue jobs configured with high-capacity `G.8X` workers to avoid out-of-memory failures."
+                    }
+                ]
+            },
+            {
+                "title": "Challenges Faced",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "*   **Driver Memory Pressure:** Several transformations (e.g., frequent `count()` operations) triggered actions that executed on the driver node.\n*   **Inefficient Patterns:** Use of `head()` after full dataset scans and unnecessary `broadcast()` operations increased memory usage.\n*   **Misleading Scaling:** Increasing worker size masked code inefficiencies rather than addressing the root cause."
+                    }
+                ]
+            },
+            {
+                "title": "Solution & Results",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "A code-level optimization approach was implemented instead of scaling infrastructure.\n*   **Action Reduction:** Removed frequent `count()` calls and replaced them with conditional checks and cached metadata where possible.\n*   **Driver Optimization:** Refactored logic to avoid driver-heavy operations and ensured transformations executed on executors.\n*   **Broadcast Control:** Eliminated unnecessary broadcast joins and optimized join strategies.\n*   **Execution Tuning:** Validated memory usage through Spark UI and Glue metrics.\n\n**Results:**\n*   **Worker Size:** Jobs successfully migrated from **`G.8X` to `G.1X`** workers.\n*   **Cost:** Significant reduction in Glue job execution cost per run.\n*   **Performance:** Improved job stability with no driver OOM errors.\n*   **Scalability:** Jobs now scale predictably with data growth instead of requiring oversized workers."
                     }
                 ]
             }

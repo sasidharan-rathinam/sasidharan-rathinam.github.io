@@ -3,8 +3,7 @@ import siteData from '../data/site.json';
 const today = new Date();
 import contactData from '../data/contact.json';
 
-// Simple icon mapping just for the footer if we want icons, or we can use text
-// The design currently uses text links, so we'll stick to text labeled by "label"
+// Don't need internal map anymore, icons come from data
 ---
 
 <footer>
@@ -12,8 +11,9 @@ import contactData from '../data/contact.json';
     <p>&copy; {today.getFullYear()} {siteData.name}. All rights reserved.</p>
     <div class="social-links">
       {contactData.contactMethods.filter(m => m.url).map(method => (
-        <a href={method.url} target={method.icon !== 'mail' ? "_blank" : "_self"} rel="noopener noreferrer">
-          {method.label}
+        <a href={method.url} target={method.icon !== 'mail' ? "_blank" : "_self"} rel="noopener noreferrer" aria-label={method.label}>
+          {method.iconSvg && <Fragment set:html={method.iconSvg} />}
+          {!method.iconSvg && method.label}
         </a>
       ))}
     </div>

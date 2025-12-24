@@ -36,7 +36,7 @@ const iconMap = {
             
             return (
                 <Element {...props}>
-                    <span class="icon" set:html={iconMap[method.icon] || ''}></span>
+                    <span class="icon" set:html={method.iconSvg || iconMap[method.icon] || ''}></span>
                     <div class="info">
                         <span class="label">{method.label}</span>
                         <span class="value" data-value={method.value}>{method.value}</span>

@@ -6,9 +6,9 @@ import themeData from '../../data/theme.json';
 
 const pageTitle = `Blog | ${siteData.name}`;
 
-// Process data to ensure sorting by date works
+// Process data to ensure sorting by order field
 const posts = blogData.sort(
-	(a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
+	(a, b) => (a.order || 999) - (b.order || 999)
 );
 
 const gridColumns = themeData.layout.grid?.blogColumns || 2;

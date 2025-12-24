@@ -18,7 +18,7 @@
         }
     },
     "typography": {
-        "fontSans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "fontSans": "'Outfit', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
         "fontMono": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, \"Liberation Mono\", monospace"
     },
     "layout": {
@@ -32,7 +32,9 @@
         },
         "grid": {
             "blogColumns": 3,
-            "projectColumns": 2
+            "projectColumns": 2,
+            "serviceColumns": 2,
+            "skillColumns": 2
         },
         "footer": {
             "height": "40px"

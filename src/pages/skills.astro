@@ -3,7 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "Skills & Tech Stack | Sasidharan Rathinam";
 
-import skills from '../data/skills.json';
+import skillsData from '../data/skills.json';
+import themeData from '../data/theme.json';
+
+const sortedSkills = skillsData.sort((a, b) => (a.order || 999) - (b.order || 999));
 ---
 
 <BaseLayout title={pageTitle}>
@@ -13,12 +16,12 @@ import skills from '../data/skills.json';
       I have worked with a wide range of technologies over the last 9 years. Here are the tools I use on a daily basis to build robust data platforms.
     </p>
 
-    <div class="skills-grid">
-      {Object.entries(skills).map(([category, items]) => (
+    <div class="skills-grid" style={`grid-template-columns: repeat(${themeData.layout.grid?.skillColumns || 3}, 1fr);`}>
+      {sortedSkills.map((skillGroup) => (
         <div class="skill-card">
-          <h3>{category}</h3>
+          <h3>{skillGroup.category}</h3>
           <ul>
-            {items.map((item) => (
+            {skillGroup.items.map((item) => (
               <li>{item}</li>
             ))}
           </ul>
@@ -36,7 +39,7 @@ import skills from '../data/skills.json';
   }
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* grid-template-columns handled inline for configuration */
     gap: var(--space-md);
   }
   .skill-card {
