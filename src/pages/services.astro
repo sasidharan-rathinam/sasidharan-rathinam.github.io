@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Services & Consulting | Sasi Rathinam";
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="container mt-8">
+    <h1 class="mb-8">Services</h1>
+    <p class="intro">
+      I offer specialized data engineering consulting services to help your business scale. 
+      Whether you need a complete ground-up architecture or optimization of existing pipelines, I can help.
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Data Pipeline Design</h3>
+        <p>
+            End-to-end design and implementation of robust ETL/ELT pipelines using tools like Airflow, dbt, and Spark. 
+            I ensure data quality, reliability, and observability are built-in from day one.
+        </p>
+      </div>
+      <div class="service-card">
+        <h3>Analytics Platform Setup</h3>
+        <p>
+            Setting up modern data warehouses (Snowflake, BigQuery, Redshift) and BI tools to empower your team 
+            with actionable insights. From data ingestion to dashboarding.
+        </p>
+      </div>
+      <div class="service-card">
+        <h3>Performance Optimization</h3>
+        <p>
+            Auditing and tuning slow queries and expensive data jobs. I help reduce cloud costs and improve 
+            data delivery SLAs, often achieving 30-50% cost reductions.
+        </p>
+      </div>
+      <div class="service-card">
+        <h3>Cloud Migration</h3>
+        <p>
+            Seamlessly migrating on-premise databases or legacy systems to the cloud (AWS/GCP). 
+            Zero-downtime strategies and secure data transfer protocols.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="mt-8">Engagement Models</h2>
+    <div class="engagement-grid">
+        <div class="engagement-item">
+            <h4>Hourly Consulting</h4>
+            <p>Best for ad-hoc troubleshooting, architecture reviews, or mentorship sessions.</p>
+        </div>
+        <div class="engagement-item">
+            <h4>Fixed-Price Project</h4>
+            <p>Ideal for well-defined deliverables like "Setup Data Lake" or "Migrate to Snowflake".</p>
+        </div>
+        <div class="engagement-item">
+            <h4>Monthly Retainer</h4>
+            <p>Ongoing support, maintenance, and incremental improvements for your data platform.</p>
+        </div>
+    </div>
+
+    <div class="cta-box">
+        <h3>Ready to upgrade your data infrastructure?</h3>
+        <p>Let's discuss how I can help you achieve your data goals.</p>
+        <a href="/contact" class="btn">Get in Touch</a>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    max-width: var(--max-width);
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  .service-card {
+    background: var(--color-bg-secondary);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .service-card h3 {
+    color: var(--color-accent);
+    margin-top: 0;
+  }
+  .engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  .engagement-item {
+    border: 1px solid var(--color-border);
+    padding: var(--space-md);
+    border-radius: 8px;
+  }
+  .engagement-item h4 {
+    margin-top: 0;
+    color: var(--color-text-main);
+  }
+  .cta-box {
+    text-align: center;
+    background: var(--color-bg-secondary);
+    padding: var(--space-xl);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+</style>

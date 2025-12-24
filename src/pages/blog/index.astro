@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const pageTitle = "Blog | Sasi Rathinam";
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="container mt-8">
+    <h1 class="mb-8">Technical Blog</h1>
+    <p class="intro">
+      Thoughts, tutorials, and deep dives into Data Engineering, Cloud Architecture, and Software Development.
+    </p>
+
+    <div class="posts-list">
+      {posts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="post-item">
+            <span class="post-date">{post.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            <div class="post-content">
+                <h3 class="post-title">{post.data.title}</h3>
+                <p class="post-description">{post.data.description}</p>
+                {post.data.tags && (
+                    <div class="tags">
+                        {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+                    </div>
+                )}
+            </div>
+        </a>
+      ))}
+       {posts.length === 0 && (
+          <p class="text-muted">No posts found.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    max-width: var(--max-width);
+    margin-bottom: var(--space-xl);
+  }
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: var(--max-width);
+  }
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    transition: opacity 0.2s;
+  }
+  .post-item:hover {
+    text-decoration: none;
+    opacity: 0.8;
+  }
+  .post-item:last-child {
+    border-bottom: none;
+  }
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .post-title {
+    margin: 0 0 var(--space-sm);
+    color: var(--color-text-main);
+    font-size: 1.5rem;
+  }
+  .post-description {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+  }
+</style>

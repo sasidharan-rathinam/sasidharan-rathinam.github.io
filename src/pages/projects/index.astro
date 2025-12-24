@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const pageTitle = "Projects | Sasi Rathinam";
+const projects = (await getCollection('projects')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="container mt-8">
+    <h1 class="mb-8">Projects / Case Studies</h1>
+    <p class="intro">
+      A selection of data engineering projects and case studies demonstrating my ability to solve complex data problems.
+    </p>
+
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <a href={`/projects/${project.slug}`} class="project-card">
+          <div class="card-content">
+            <h3 class="title">{project.data.title}</h3>
+            {project.data.company && <p class="company">{project.data.company}</p>}
+            <p class="description">{project.data.description}</p>
+            <div class="tags">
+                {project.data.tags?.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+            </div>
+            <span class="read-more">Read Case Study &rarr;</span>
+          </div>
+        </a>
+      ))}
+       {projects.length === 0 && (
+          <p class="text-muted">Projects coming soon...</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    max-width: var(--max-width);
+    margin-bottom: var(--space-lg);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+  .project-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    border-color: var(--color-accent);
+  }
+  .card-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .title {
+    margin: 0 0 var(--space-sm);
+    color: var(--color-text-main);
+    font-size: 1.5rem;
+  }
+  .company {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+  }
+  .description {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+  .read-more {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+</style>

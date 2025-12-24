@@ -1,0 +1,55 @@
+---
+---
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">
+      Hi, I'm Sasi Rathinam.<br />
+      <span class="text-gradient">Senior Data Engineer & Freelance Consultant</span>
+    </h1>
+    <p class="hero-subtitle">
+      Building scalable data pipelines and analytics platforms for startups and data-driven businesses. 
+      I turn complex data challenges into reliable, high-performance solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="/contact" class="btn">Hire Me</a>
+      <a href="/projects" class="btn btn-outline">View Projects</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-xl) 0;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+  }
+  .text-gradient {
+    color: var(--color-accent); /* Fallback */
+    background: linear-gradient(135deg, var(--color-accent) 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin-top: var(--space-sm);
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto var(--space-lg);
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+  
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

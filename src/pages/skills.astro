@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Skills & Tech Stack | Sasi Rathinam";
+
+const skills = {
+  "Data Engineering": [
+    "ETL / ELT Pipelines",
+    "Batch & Streaming Processing",
+    "Data Modeling (OLTP, OLAP, Star/Snowflake)",
+    "Bronze-Silver-Gold Architecture"
+  ],
+  "Databases & Storage": [
+    "PostgreSQL",
+    "MySQL",
+    "BigQuery",
+    "Redshift",
+    "Snowflake",
+    "AWS S3",
+    "Google Cloud Storage",
+    "Data Lakes"
+  ],
+  "Big Data & Processing": [
+    "Apache Spark",
+    "Apache Airflow",
+    "AWS Glue",
+    "dbt (Data Build Tool)",
+    "Kafka"
+  ],
+  "Cloud & DevOps": [
+    "AWS (Lambda, EMR, Redshift, Glue)",
+    "GCP (BigQuery, Dataflow, Cloud Composer)",
+    "Docker",
+    "CI/CD (GitHub Actions, GitLab CI)",
+    "Terraform",
+    "IAM & Security"
+  ],
+  "Languages": [
+    "Python (Expert)",
+    "SQL (Expert)",
+    "Scala",
+    "Shell Scripting"
+  ]
+};
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="container mt-8">
+    <h1 class="mb-8">Tools & Technologies</h1>
+    <p class="intro">
+      I have worked with a wide range of technologies over the last 9 years. Here are the tools I use on a daily basis to build robust data platforms.
+    </p>
+
+    <div class="skills-grid">
+      {Object.entries(skills).map(([category, items]) => (
+        <div class="skill-card">
+          <h3>{category}</h3>
+          <ul>
+            {items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    max-width: var(--max-width);
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+  }
+  .skill-card {
+    background: var(--color-bg-secondary);
+    padding: var(--space-md);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .skill-card h3 {
+    margin-top: 0;
+    color: var(--color-accent);
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .skill-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .skill-card li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .skill-card li::before {
+    content: "▹";
+    color: var(--color-accent);
+    margin-right: 0.5rem;
+  }
+</style>

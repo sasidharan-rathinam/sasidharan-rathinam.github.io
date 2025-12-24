@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const pageTitle = "Sasi Rathinam | Senior Data Engineer";
+---
+
+<BaseLayout title={pageTitle}>
+  <Hero />
+  
+  <section class="summary container">
+    <div class="summary-grid">
+      <div class="summary-item">
+        <h2>9+ Years</h2>
+        <p class="text-muted">Experience in Data Engineering & Analytics</p>
+      </div>
+      <div class="summary-item">
+        <h2>Cloud Native</h2>
+        <p class="text-muted">Expert in AWS, GCP, and Modern Data Stack</p>
+      </div>
+      <div class="summary-item">
+        <h2>High Impact</h2>
+        <p class="text-muted">Delivering scalable solutions for Startups & SaaS</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mt-8 mb-8">
+    <h3 class="section-title">What I Do</h3>
+    <p>
+      I specialize in designing and building robust data infrastructures. From setting up your first data warehouse to optimizing complex ETL pipelines processing terabytes of data, I help businesses unlock the true value of their data.
+    </p>
+    <ul class="services-preview">
+        <li>ELT/ETL Pipeline Development</li>
+        <li>Data Warehouse Architecture (Snowflake, BigQuery, Redshift)</li>
+        <li>Data Lake Implementation</li>
+        <li>Performance Tuning & Cost Optimization</li>
+    </ul>
+    <div class="mt-8">
+        <a href="/services" class="link-arrow">See all services &rarr;</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .summary {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-xl);
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    text-align: center;
+  }
+  .summary-item h2 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+    margin-top: 0;
+    font-size: 2.5rem;
+  }
+  .services-preview {
+    margin-top: var(--space-md);
+    padding-left: var(--space-md);
+  }
+  .services-preview li {
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-muted);
+  }
+  .link-arrow {
+    font-weight: 600;
+  }
+</style>
