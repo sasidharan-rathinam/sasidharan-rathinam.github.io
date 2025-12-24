@@ -1,0 +1,194 @@
+[
+    {
+        "slug": "optimizing-redshift",
+        "title": "Optimizing AWS Redshift Costs for High-Throughput Data Pipelines",
+        "description": "Practical strategies to reduce your AWS bill when running large-scale data warehouses.",
+        "pubDate": "2024-08-20",
+        "tags": [
+            "AWS",
+            "Redshift",
+            "Cost Optimization",
+            "Data Engineering"
+        ],
+        "heroImage": "/images/blog-placeholder-1.jpg",
+        "sections": [
+            {
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "AWS Redshift is a powerful cloud data warehouse, but costs can spiral out of control if not managed correctly. In this post, I'll share three strategies I've used to cut Redshift bills by up to 30%."
+                    }
+                ]
+            },
+            {
+                "title": "1. Utilize RA3 Nodes with Managed Storage",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Separating compute from storage is the single biggest architectural win. RA3 nodes allow you to scale storage independently of compute. If you have cold data that is rarely queried, you don't need to pay for expensive compute nodes just to store it."
+                    }
+                ]
+            },
+            {
+                "title": "2. Implement Proper Sort and Distribution Keys",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Badly distributed data leads to \"broadcast\" operations during joins, which are extremely expensive (and slow).\n\n*   **Distribute by Key:** For large fact tables joining with large dimension tables.\n*   **Distribute All:** For small dimension tables (replicates data to all nodes).\n*   **Sort Keys:** Always sort by your most frequent `WHERE` clause columns (usually timestamps)."
+                    }
+                ]
+            },
+            {
+                "title": "3. Pause Clusters During Non-Business Hours",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "For development and staging environments, there is absolutely no reason to keep clusters running 24/7. Use AWS Lambda or a simple cron job to pause clusters at 7 PM and resume them at 7 AM. This alone cuts dev costs by ~60%."
+                    },
+                    {
+                        "type": "code",
+                        "language": "python",
+                        "value": "import boto3\n\ndef lambda_handler(event, context):\n    redshift = boto3.client('redshift')\n    redshift.pause_cluster(ClusterIdentifier='my-dev-cluster')\n    print(\"Cluster paused.\")"
+                    }
+                ]
+            },
+            {
+                "title": "Conclusion",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Cost optimization isn't a one-time task; it's a continuous process. By implementing right-sizing, improving data hygiene, and automating uptime, you can maintain a high-performance data platform without breaking the bank."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "optimizing-redshift",
+        "title": "Optimizing AWS Redshift Costs for High-Throughput Data Pipelines",
+        "description": "Practical strategies to reduce your AWS bill when running large-scale data warehouses.",
+        "pubDate": "2024-08-20",
+        "tags": [
+            "AWS",
+            "Redshift",
+            "Cost Optimization",
+            "Data Engineering"
+        ],
+        "heroImage": "/images/blog-placeholder-1.jpg",
+        "sections": [
+            {
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "AWS Redshift is a powerful cloud data warehouse, but costs can spiral out of control if not managed correctly. In this post, I'll share three strategies I've used to cut Redshift bills by up to 30%."
+                    }
+                ]
+            },
+            {
+                "title": "1. Utilize RA3 Nodes with Managed Storage",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Separating compute from storage is the single biggest architectural win. RA3 nodes allow you to scale storage independently of compute. If you have cold data that is rarely queried, you don't need to pay for expensive compute nodes just to store it."
+                    }
+                ]
+            },
+            {
+                "title": "2. Implement Proper Sort and Distribution Keys",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Badly distributed data leads to \"broadcast\" operations during joins, which are extremely expensive (and slow).\n\n*   **Distribute by Key:** For large fact tables joining with large dimension tables.\n*   **Distribute All:** For small dimension tables (replicates data to all nodes).\n*   **Sort Keys:** Always sort by your most frequent `WHERE` clause columns (usually timestamps)."
+                    }
+                ]
+            },
+            {
+                "title": "3. Pause Clusters During Non-Business Hours",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "For development and staging environments, there is absolutely no reason to keep clusters running 24/7. Use AWS Lambda or a simple cron job to pause clusters at 7 PM and resume them at 7 AM. This alone cuts dev costs by ~60%."
+                    },
+                    {
+                        "type": "code",
+                        "language": "python",
+                        "value": "import boto3\n\ndef lambda_handler(event, context):\n    redshift = boto3.client('redshift')\n    redshift.pause_cluster(ClusterIdentifier='my-dev-cluster')\n    print(\"Cluster paused.\")"
+                    }
+                ]
+            },
+            {
+                "title": "Conclusion",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Cost optimization isn't a one-time task; it's a continuous process. By implementing right-sizing, improving data hygiene, and automating uptime, you can maintain a high-performance data platform without breaking the bank."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "optimizing-redshift",
+        "title": "Optimizing AWS Redshift Costs for High-Throughput Data Pipelines",
+        "description": "Practical strategies to reduce your AWS bill when running large-scale data warehouses.",
+        "pubDate": "2024-08-20",
+        "tags": [
+            "AWS",
+            "Redshift",
+            "Cost Optimization",
+            "Data Engineering"
+        ],
+        "heroImage": "/images/blog-placeholder-1.jpg",
+        "sections": [
+            {
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "AWS Redshift is a powerful cloud data warehouse, but costs can spiral out of control if not managed correctly. In this post, I'll share three strategies I've used to cut Redshift bills by up to 30%."
+                    }
+                ]
+            },
+            {
+                "title": "1. Utilize RA3 Nodes with Managed Storage",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Separating compute from storage is the single biggest architectural win. RA3 nodes allow you to scale storage independently of compute. If you have cold data that is rarely queried, you don't need to pay for expensive compute nodes just to store it."
+                    }
+                ]
+            },
+            {
+                "title": "2. Implement Proper Sort and Distribution Keys",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Badly distributed data leads to \"broadcast\" operations during joins, which are extremely expensive (and slow).\n\n*   **Distribute by Key:** For large fact tables joining with large dimension tables.\n*   **Distribute All:** For small dimension tables (replicates data to all nodes).\n*   **Sort Keys:** Always sort by your most frequent `WHERE` clause columns (usually timestamps)."
+                    }
+                ]
+            },
+            {
+                "title": "3. Pause Clusters During Non-Business Hours",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "For development and staging environments, there is absolutely no reason to keep clusters running 24/7. Use AWS Lambda or a simple cron job to pause clusters at 7 PM and resume them at 7 AM. This alone cuts dev costs by ~60%."
+                    },
+                    {
+                        "type": "code",
+                        "language": "python",
+                        "value": "import boto3\n\ndef lambda_handler(event, context):\n    redshift = boto3.client('redshift')\n    redshift.pause_cluster(ClusterIdentifier='my-dev-cluster')\n    print(\"Cluster paused.\")"
+                    }
+                ]
+            },
+            {
+                "title": "Conclusion",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "Cost optimization isn't a one-time task; it's a continuous process. By implementing right-sizing, improving data hygiene, and automating uptime, you can maintain a high-performance data platform without breaking the bank."
+                    }
+                ]
+            }
+        ]
+    }
+]

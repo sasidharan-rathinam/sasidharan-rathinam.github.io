@@ -1,18 +1,19 @@
 ---
+import homeData from '../data/home.json';
+const { hero } = homeData;
 ---
 <section class="hero">
   <div class="container">
     <h1 class="hero-title">
-      Hi, I'm Sasi Rathinam.<br />
-      <span class="text-gradient">Senior Data Engineer & Freelance Consultant</span>
+      <Fragment set:html={hero.title} /><br />
+      <span class="text-gradient">{hero.subtitle}</span>
     </h1>
     <p class="hero-subtitle">
-      Building scalable data pipelines and analytics platforms for startups and data-driven businesses. 
-      I turn complex data challenges into reliable, high-performance solutions.
+      {hero.description}
     </p>
     <div class="hero-actions">
-      <a href="/contact" class="btn">Hire Me</a>
-      <a href="/projects" class="btn btn-outline">View Projects</a>
+      <a href={hero.cta_primary.url} class="btn">{hero.cta_primary.text}</a>
+      <a href={hero.cta_secondary.url} class="btn btn-outline">{hero.cta_secondary.text}</a>
     </div>
   </div>
 </section>

@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import theme from '../data/theme.json';
 
 interface Props {
 	title: string;
@@ -9,6 +10,30 @@ interface Props {
 }
 
 const { title, description = "Senior Data Engineer & Freelance Data Consultant" } = Astro.props;
+
+const { colors, typography, layout } = theme;
+const cssVariables = {
+    // Light Theme Colors
+    '--color-bg': colors.light.bg,
+    '--color-bg-secondary': colors.light.bgSecondary,
+    '--color-text-main': colors.light.textMain,
+    '--color-text-muted': colors.light.textMuted,
+    '--color-accent': colors.light.accent,
+    '--color-border': colors.light.border,
+    
+    // Typography
+    '--font-sans': typography.fontSans,
+    '--font-mono': typography.fontMono,
+    
+    // Layout
+    '--max-width': layout.maxWidth,
+    '--container-width': layout.containerWidth,
+    '--space-sm': layout.spacing.sm,
+    '--space-md': layout.spacing.md,
+    '--space-lg': layout.spacing.lg,
+    '--space-xl': layout.spacing.xl,
+};
+
 ---
 
 <!doctype html>
@@ -20,6 +45,56 @@ const { title, description = "Senior Data Engineer & Freelance Data Consultant" 
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+
+        <!-- Dynamic Theme Styles -->
+        <style is:global define:vars={cssVariables}>
+            :root {
+                /* Variables injected automatically by define:vars */
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-bg: #0f172a;
+                    --color-bg-secondary: #1e293b;
+                    --color-text-main: #f9fafb;
+                    --color-text-muted: #94a3b8;
+                    --color-accent: #60a5fa;
+                    --color-border: #334155;
+                }
+            }
+        </style>
+        
+        <!-- Raw script to support dynamic dark mode from JSON if needed, but for now hardcoding the media query in style tag above is a compromise unless we construct the whole string. 
+        Actually, let's construct the style string to fully use JSON values. -->
+        <style is:global set:html={`
+            :root {
+                --color-bg: ${colors.light.bg};
+                --color-bg-secondary: ${colors.light.bgSecondary};
+                --color-text-main: ${colors.light.textMain};
+                --color-text-muted: ${colors.light.textMuted};
+                --color-accent: ${colors.light.accent};
+                --color-border: ${colors.light.border};
+                
+                --font-sans: ${typography.fontSans};
+                --font-mono: ${typography.fontMono};
+                
+                --max-width: ${layout.maxWidth};
+                --container-width: ${layout.containerWidth};
+                --space-sm: ${layout.spacing.sm};
+                --space-md: ${layout.spacing.md};
+                --space-lg: ${layout.spacing.lg};
+                --space-xl: ${layout.spacing.xl};
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-bg: ${colors.dark.bg};
+                    --color-bg-secondary: ${colors.dark.bgSecondary};
+                    --color-text-main: ${colors.dark.textMain};
+                    --color-text-muted: ${colors.dark.textMuted};
+                    --color-accent: ${colors.dark.accent};
+                    --color-border: ${colors.dark.border};
+                }
+            }
+        `} />
 	</head>
 	<body>
 		<Header />
@@ -32,6 +107,6 @@ const { title, description = "Senior Data Engineer & Freelance Data Consultant" 
 
 <style>
   main {
-    flex: 1; /* Take up remaining space */
+    flex: 1; 
   }
 </style>

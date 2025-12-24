@@ -1,4 +1,4 @@
-# Sasi Rathinam - Portfolio Website
+# Sasidharan Rathinam - Portfolio Website
 
 This text is the source code for my personal portfolio website, built with [Astro](https://astro.build).
 

@@ -1,0 +1,63 @@
+[
+    {
+        "slug": "migration-case-study",
+        "title": "Enterprise Data Warehouse Migration to Snowflake",
+        "description": "Migrating a 50TB on-premise Oracle data warehouse to Snowflake, reducing query times by 60%.",
+        "pubDate": "2024-06-15",
+        "tags": [
+            "Snowflake",
+            "dbt",
+            "Airflow",
+            "Migration"
+        ],
+        "company": "FinTech Startup",
+        "role": "Lead Data Engineer",
+        "sections": [
+            {
+                "title": "Problem Statement",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "The client was operating a legacy on-premise Oracle data warehouse that was becoming increasingly expensive to maintain. Query performance was degrading as data volume grew to over 50TB, and the business users were experiencing significant delays in their daily reporting."
+                    }
+                ]
+            },
+            {
+                "title": "Business Context",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "*   **Sector:** Financial Technology\n*   **Scale:** 50TB+ Historical Data, 200GB Daily Ingestion\n*   **Goal:** Modernize the data stack to support real-time analytics and reduce TCO (Total Cost of Ownership)."
+                    }
+                ]
+            },
+            {
+                "title": "Architecture",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "We designed a modern lakehouse architecture:\n1.  **Ingestion:** AWS DMS for initial load and CDC (Change Data Capture) for ongoing replication to S3.\n2.  **Processing:** Apache Airflow to orchestrate data loading from S3 to Snowflake.\n3.  **Transformation:** dbt (data build tool) for modeling data into raw (Bronze), cleansed (Silver), and business-ready (Gold) layers."
+                    }
+                ]
+            },
+            {
+                "title": "Challenges Faced",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "*   **Data Quality:** Legacy data had significant inconsistences that required complex cleaning logic during the Silver layer transformation.\n*   **Downtime:** The migration needed to happen with near-zero downtime for the reporting team.\n*   **Cost Control:** Initial compute costs on Snowflake were high due to unoptimized queries."
+                    }
+                ]
+            },
+            {
+                "title": "Solution & Results",
+                "content": [
+                    {
+                        "type": "text",
+                        "value": "We implemented a phased migration approach.\n*   **Performance:** Reporting query reduction from 45 minutes to <2 minutes.\n*   **Scalability:** The new architecture handles peak loads automatically without manual intervention.\n*   **Cost:** Reduced operational costs by 40% compared to the on-premise licensing and maintenance fees.\n\n> \"Sasi's expertise in Snowflake and dbt was crucial for this migration. He not only moved our data but completely revitalized how we use it.\" - *CTO, Client Company*"
+                    }
+                ]
+            }
+        ]
+    }
+]

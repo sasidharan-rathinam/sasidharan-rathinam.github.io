@@ -1,0 +1,43 @@
+{
+    "hero": {
+        "title": "Hi, I'm Sasidharan Rathinam.",
+        "subtitle": "Senior Data Engineer & Freelance Consultant",
+        "description": "Building scalable data pipelines and analytics platforms for startups and data-driven businesses. I turn complex data challenges into reliable, high-performance solutions.",
+        "cta_primary": {
+            "text": "Hire Me",
+            "url": "/contact"
+        },
+        "cta_secondary": {
+            "text": "View Projects",
+            "url": "/projects"
+        }
+    },
+    "summary": [
+        {
+            "title": "9+ Years",
+            "text": "Experience in Data Engineering & Analytics"
+        },
+        {
+            "title": "Cloud Native",
+            "text": "Expert in AWS, GCP, and Modern Data Stack"
+        },
+        {
+            "title": "High Impact",
+            "text": "Delivering scalable solutions for Startups & SaaS"
+        }
+    ],
+    "services_preview": {
+        "title": "What I Do",
+        "description": "I specialize in designing and building robust data infrastructures. From setting up your first data warehouse to optimizing complex ETL pipelines processing terabytes of data, I help businesses unlock the true value of their data.",
+        "items": [
+            "ELT/ETL Pipeline Development",
+            "Data Warehouse Architecture (Snowflake, BigQuery, Redshift)",
+            "Data Lake Implementation",
+            "Performance Tuning & Cost Optimization"
+        ],
+        "link": {
+            "text": "See all services \u2192",
+            "url": "/services"
+        }
+    }
+}

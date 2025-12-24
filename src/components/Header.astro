@@ -1,8 +1,9 @@
 ---
+import siteData from '../data/site.json';
 ---
 <header>
   <nav class="container nav-content">
-    <a href="/" class="logo">Sasi Rathinam</a>
+    <a href="/" class="logo">{siteData.name}</a>
     <div class="nav-links">
       <a href="/about">About</a>
       <a href="/skills">Skills</a>
@@ -18,6 +19,18 @@
   header {
     padding: var(--space-md) 0;
     border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-bg); /* Ensure content doesn't show behind */
+    /* Optional: minimal backdrop blur for modern feel */
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for light mode */
+  }
+  @media (prefers-color-scheme: dark) {
+    header {
+      background-color: rgba(15, 23, 42, 0.9); /* Slight transparency for dark mode */
+    }
   }
   .nav-content {
     display: flex;

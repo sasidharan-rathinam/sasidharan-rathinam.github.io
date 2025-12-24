@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import homeData from '../data/home.json';
+import siteData from '../data/site.json';
 
-const pageTitle = "Sasi Rathinam | Senior Data Engineer";
+const pageTitle = `${siteData.name} | Senior Data Engineer`;
+const { summary, services_preview } = homeData;
 ---
 
 <BaseLayout title={pageTitle}>
@@ -10,34 +13,27 @@ const pageTitle = "Sasi Rathinam | Senior Data Engineer";
   
   <section class="summary container">
     <div class="summary-grid">
-      <div class="summary-item">
-        <h2>9+ Years</h2>
-        <p class="text-muted">Experience in Data Engineering & Analytics</p>
-      </div>
-      <div class="summary-item">
-        <h2>Cloud Native</h2>
-        <p class="text-muted">Expert in AWS, GCP, and Modern Data Stack</p>
-      </div>
-      <div class="summary-item">
-        <h2>High Impact</h2>
-        <p class="text-muted">Delivering scalable solutions for Startups & SaaS</p>
-      </div>
+      {summary.map(item => (
+          <div class="summary-item">
+            <h2>{item.title}</h2>
+            <p class="text-muted">{item.text}</p>
+          </div>
+      ))}
     </div>
   </section>
 
   <section class="container mt-8 mb-8">
-    <h3 class="section-title">What I Do</h3>
+    <h3 class="section-title">{services_preview.title}</h3>
     <p>
-      I specialize in designing and building robust data infrastructures. From setting up your first data warehouse to optimizing complex ETL pipelines processing terabytes of data, I help businesses unlock the true value of their data.
+      {services_preview.description}
     </p>
     <ul class="services-preview">
-        <li>ELT/ETL Pipeline Development</li>
-        <li>Data Warehouse Architecture (Snowflake, BigQuery, Redshift)</li>
-        <li>Data Lake Implementation</li>
-        <li>Performance Tuning & Cost Optimization</li>
+        {services_preview.items.map(item => (
+            <li>{item}</li>
+        ))}
     </ul>
     <div class="mt-8">
-        <a href="/services" class="link-arrow">See all services &rarr;</a>
+        <a href={services_preview.link.url} class="link-arrow">{services_preview.link.text}</a>
     </div>
   </section>
 </BaseLayout>

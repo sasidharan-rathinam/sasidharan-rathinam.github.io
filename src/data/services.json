@@ -1,0 +1,35 @@
+{
+    "intro": "I offer specialized data engineering consulting services to help your business scale. Whether you need a complete ground-up architecture or optimization of existing pipelines, I can help.",
+    "services": [
+        {
+            "title": "Data Pipeline Design",
+            "description": "End-to-end design and implementation of robust ETL/ELT pipelines using tools like Airflow, dbt, and Spark. I ensure data quality, reliability, and observability are built-in from day one."
+        },
+        {
+            "title": "Analytics Platform Setup",
+            "description": "Setting up modern data warehouses (Snowflake, BigQuery, Redshift) and BI tools to empower your team with actionable insights. From data ingestion to dashboarding."
+        },
+        {
+            "title": "Performance Optimization",
+            "description": "Auditing and tuning slow queries and expensive data jobs. I help reduce cloud costs and improve data delivery SLAs, often achieving 30-50% cost reductions."
+        },
+        {
+            "title": "Cloud Migration",
+            "description": "Seamlessly migrating on-premise databases or legacy systems to the cloud (AWS/GCP). Zero-downtime strategies and secure data transfer protocols."
+        }
+    ],
+    "engagement_models": [
+        {
+            "title": "Hourly Consulting",
+            "description": "Best for ad-hoc troubleshooting, architecture reviews, or mentorship sessions."
+        },
+        {
+            "title": "Fixed-Price Project",
+            "description": "Ideal for well-defined deliverables like \"Setup Data Lake\" or \"Migrate to Snowflake\"."
+        },
+        {
+            "title": "Monthly Retainer",
+            "description": "Ongoing support, maintenance, and incremental improvements for your data platform."
+        }
+    ]
+}

@@ -1,43 +1,53 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import blogData from '../../data/blog.json';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
+	return blogData.map((post) => ({
 		params: { slug: post.slug },
-		props: post,
+		props: { post },
 	}));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
-const { Content } = await post.render();
+const { post } = Astro.props;
+// Content is now in sections, parsed in template
+
+// Formatting Date
+const formattedDate = new Date(post.pubDate).toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+});
+
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
-	<article class="container mt-8">
-        <header class="post-header">
-             <a href="/blog" class="back-link">&larr; Back to Blog</a>
-            <div class="meta">
-                <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('en-us', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    })}
-                </time>
-                {post.data.tags && (
-                    <span class="tags">
-                         • {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
-                    </span>
-                )}
+<BaseLayout title={post.title}>
+	<article class="container mt-8 mb-8 blog-article">
+		<div class="blog-header">
+			<div class="date">{formattedDate}</div>
+			<h1>{post.title}</h1>
+            <div class="tags mt-4">
+                {post.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                ))}
             </div>
-            <h1 class="title">{post.data.title}</h1>
-        </header>
+			<hr />
+		</div>
         
         <div class="prose content">
-		    <Content />
+            {post.sections.map(section => (
+                <div class="section mb-8">
+                    {section.title && <h2 class="section-title">{section.title}</h2>}
+                    {section.content.map(block => (
+                        block.type === 'text' ? (
+                            <div set:html={marked.parse(block.value)} />
+                        ) : block.type === 'code' ? (
+                             <pre><code class={`language-${block.language}`}>{block.value}</code></pre>
+                        ) : null
+                    ))}
+                </div>
+            ))}
         </div>
 	</article>
 </BaseLayout>
@@ -69,42 +79,6 @@ const { Content } = await post.render();
         font-size: 2.5rem;
         margin-bottom: 0;
     }
-    .content {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        font-size: 1.125rem;
-        line-height: 1.7;
-    }
-    /* Prose styling */
-    .content :global(h2) {
-        margin-top: 2rem;
-        font-size: 1.75rem;
-    }
-    .content :global(h3) {
-        margin-top: 1.5rem;
-        font-size: 1.4rem;
-    }
-    .content :global(p) {
-        margin-bottom: 1.5rem;
-    }
-    .content :global(ul), .content :global(ol) {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
-    }
-    .content :global(li) {
-        margin-bottom: 0.5rem;
-    }
-    .content :global(blockquote) {
-        border-left: 4px solid var(--color-accent);
-        padding-left: 1rem;
-        font-style: italic;
-        color: var(--color-text-muted);
-        margin: 1.5rem 0;
-    }
-    .content :global(img) {
-         max-width: 100%;
-        border-radius: 8px;
-        margin: var(--space-md) 0;
-        border: 1px solid var(--color-border);
-    }
+    /* Prose styling handled globally */
+
 </style>

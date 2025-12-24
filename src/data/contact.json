@@ -1,0 +1,23 @@
+{
+    "intro": "I'm currently open to new projects and consulting opportunities. Whether you have a question or want to discuss a potential collaboration, feel free to reach out!",
+    "contactMethods": [
+        {
+            "icon": "mail",
+            "label": "Email",
+            "value": "sasidharan.rathinam@example.com",
+            "url": "mailto:sasidharan.rathinam@example.com"
+        },
+        {
+            "icon": "linkedin",
+            "label": "LinkedIn",
+            "value": "linkedin.com/in/sasidharan-rathinam",
+            "url": "https://linkedin.com/in/sasidharan-rathinam"
+        },
+        {
+            "icon": "github",
+            "label": "GitHub",
+            "value": "github.com/sasidharan-rathinam",
+            "url": "https://github.com/sasidharan-rathinam"
+        }
+    ]
+}

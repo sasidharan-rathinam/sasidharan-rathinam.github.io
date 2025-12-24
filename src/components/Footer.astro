@@ -1,13 +1,14 @@
 ---
+import siteData from '../data/site.json';
 const today = new Date();
 ---
 
 <footer>
   <div class="container footer-content">
-    <p>&copy; {today.getFullYear()} Sasidharan Rathinam. All rights reserved.</p>
+    <p>&copy; {today.getFullYear()} {siteData.name}. All rights reserved.</p>
     <div class="social-links">
-      <a href="https://github.com/sasidharan-rathinam" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://linkedin.com/in/sasidharan-rathinam" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={siteData.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={siteData.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </div>
 </footer>

@@ -1,69 +1,77 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import projectsData from '../../data/projects.json';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
-	const projects = await getCollection('projects');
-	return projects.map((project) => ({
+	return projectsData.map((project) => ({
 		params: { slug: project.slug },
-		props: project,
+		props: { project },
 	}));
 }
-type Props = CollectionEntry<'projects'>;
 
-const project = Astro.props;
-const { Content } = await project.render();
+const { project } = Astro.props;
+// Content is now in sections, parsed in template
 
-const pageTitle = `${project.data.title} | Projects`;
+// Formatting Date
+const formattedDate = new Date(project.pubDate).toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+});
 ---
 
-<BaseLayout title={pageTitle} description={project.data.description}>
-	<article class="container mt-8">
-        <div class="project-header">
-            <a href="/projects" class="back-link">&larr; Back to Projects</a>
-            <h1 class="title">{project.data.title}</h1>
-            <div class="meta">
-                {project.data.company && <span class="company">{project.data.company}</span>}
-                {project.data.role && <span class="role"> | {project.data.role}</span>}
-                <span class="date"> | {project.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short'})}</span>
+<BaseLayout title={`${project.title} | Projects`}> 
+	<article class="container mt-8 mb-8 project-article">
+		<div class="project-header">
+            <div class="project-meta-top">
+                <span class="date">{formattedDate}</span>
+                {project.company && <span class="divider">•</span>}
+                {project.company && <span class="company">{project.company}</span>}
+                {project.role && <span class="divider">•</span>}
+                {project.role && <span class="role">{project.role}</span>}
             </div>
-            {project.data.tags && (
-                <div class="tags">
-                    {project.data.tags.map(tag => <span class="tag">{tag}</span>)}
-                </div>
-            )}
-        </div>
+			<h1>{project.title}</h1>
+            <div class="tags mt-4">
+                {project.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                ))}
+            </div>
+			<hr />
+		</div>
         
         <div class="prose content">
-		    <Content />
+            {project.sections.map(section => (
+                <div class="section mb-8">
+                    {section.title && <h2 class="section-title">{section.title}</h2>}
+                    {section.content.map(block => (
+                        block.type === 'text' ? (
+                            <div set:html={marked.parse(block.value)} />
+                        ) : block.type === 'code' ? (
+                            <pre><code class={`language-${block.language}`}>{block.value}</code></pre>
+                        ) : null
+                    ))}
+                </div>
+            ))}
         </div>
 	</article>
 </BaseLayout>
 
 <style>
     .project-header {
-        margin-bottom: var(--space-xl);
-        border-bottom: 1px solid var(--color-border);
-        padding-bottom: var(--space-lg);
-    }
-    .back-link {
-        display: inline-block;
-        margin-bottom: var(--space-md);
-        font-size: 0.9rem;
-        color: var(--color-text-muted);
-    }
-    .title {
-        font-size: 2.5rem;
-        margin-bottom: var(--space-sm);
-    }
-    .meta {
-        color: var(--color-text-muted);
-        margin-bottom: var(--space-md);
-        font-size: 1.1rem;
+        margin-bottom: var(--space-lg);
     }
     .company {
-        color: var(--color-accent);
         font-weight: 600;
+        color: var(--color-accent);
+    }
+    .project-meta-top {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        margin-bottom: var(--space-sm);
+        display: flex;
+        gap: 0.5rem;
+        align-items: center; /* Helper for vertical alignment */
     }
     .tags {
         display: flex;
@@ -77,29 +85,6 @@ const pageTitle = `${project.data.title} | Projects`;
         font-size: 0.85rem;
         color: var(--color-text-main);
     }
-    .content {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        font-size: 1.125rem;
-    }
-    /* Add basic prose styling for markdown content */
-    .content :global(h2) {
-        margin-top: 2.5rem;
-    }
-    .content :global(p) {
-        margin-bottom: 1.5rem;
-    }
-    .content :global(ul) {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
-    }
-    .content :global(li) {
-        margin-bottom: 0.5rem;
-    }
-    .content :global(img) {
-        max-width: 100%;
-        border-radius: 8px;
-        margin: var(--space-md) 0;
-        border: 1px solid var(--color-border);
-    }
+    /* Prose styling handled globally */
+
 </style>
