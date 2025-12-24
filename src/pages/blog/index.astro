@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import blogData from '../../data/blog.json';
 import siteData from '../../data/site.json';
+import themeData from '../../data/theme.json';
 
 const pageTitle = `Blog | ${siteData.name}`;
 
@@ -9,16 +10,19 @@ const pageTitle = `Blog | ${siteData.name}`;
 const posts = blogData.sort(
 	(a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
 );
+
+const gridColumns = themeData.layout.grid?.blogColumns || 2;
 ---
 
 <BaseLayout title={pageTitle}>
 	<section class="container mt-8">
 		<h1 class="mb-8">Blog</h1>
-		<div class="project-grid"> 
+		<div class="project-grid" style={`grid-template-columns: repeat(${gridColumns}, 1fr);`}> 
 			{
 				posts.map((post) => (
 					<a href={`/blog/${post.slug}/`} class="project-card-link">
                         <div class="project-card">
+                            {post.heroImage && <img src={post.heroImage} alt={post.title} class="card-image" />}
                             <div class="project-content">
                                 <h3 class="title">{post.title}</h3>
                                 <div class="meta">
@@ -50,5 +54,11 @@ const posts = blogData.sort(
   .intro {
     max-width: var(--max-width);
     margin-bottom: var(--space-xl);
+  }
+  .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--color-border);
   }
 </style>

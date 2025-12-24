@@ -83,6 +83,8 @@ const cssVariables = {
                 --space-md: ${layout.spacing.md};
                 --space-lg: ${layout.spacing.lg};
                 --space-xl: ${layout.spacing.xl};
+
+                --footer-height: ${layout.footer.height};
             }
             @media (prefers-color-scheme: dark) {
                 :root {
@@ -108,5 +110,6 @@ const cssVariables = {
 <style>
   main {
     flex: 1; 
+    padding-bottom: calc(var(--footer-height) + 2rem); /* Space for fixed user footer */
   }
 </style>

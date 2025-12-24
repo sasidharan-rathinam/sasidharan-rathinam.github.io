@@ -4,7 +4,7 @@
         "subtitle": "Senior Data Engineer & Freelance Consultant",
         "description": "Building scalable data pipelines and analytics platforms for startups and data-driven businesses. I turn complex data challenges into reliable, high-performance solutions.",
         "cta_primary": {
-            "text": "Hire Me",
+            "text": "Contact",
             "url": "/contact"
         },
         "cta_secondary": {
@@ -38,6 +38,42 @@
         "link": {
             "text": "See all services \u2192",
             "url": "/services"
+        }
+    },
+    "projects_section": {
+        "title": "Featured Projects",
+        "featured_slugs": [
+            "migration-case-study"
+        ],
+        "link": {
+            "text": "View all projects \u2192",
+            "url": "/projects"
+        }
+    },
+    "blog_section": {
+        "title": "Latest Articles",
+        "featured_slugs": [
+            "optimizing-redshift",
+            "optimizing-redshift"
+        ],
+        "link": {
+            "text": "Read all posts \u2192",
+            "url": "/blog"
+        }
+    },
+    "skills_section": {
+        "title": "Technical Skills",
+        "items": [
+            "Python",
+            "SQL",
+            "AWS",
+            "Snowflake",
+            "Data Engineering",
+            "ETL/ELT"
+        ],
+        "link": {
+            "text": "View All Skills \u2192",
+            "url": "/skills"
         }
     }
 }

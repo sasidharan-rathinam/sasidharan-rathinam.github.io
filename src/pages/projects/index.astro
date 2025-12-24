@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import projectsData from '../../data/projects.json';
 import siteData from '../../data/site.json';
+import themeData from '../../data/theme.json';
 
 const pageTitle = `Projects | ${siteData.name}`;
 
@@ -9,12 +10,14 @@ const pageTitle = `Projects | ${siteData.name}`;
 const projects = projectsData.sort(
 	(a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
 );
+
+const gridColumns = themeData.layout.grid?.projectColumns || 2;
 ---
 
 <BaseLayout title={pageTitle}>
 	<section class="container mt-8">
 		<h1 class="mb-8">Projects</h1>
-		<div class="project-grid">
+		<div class="project-grid" style={`grid-template-columns: repeat(${gridColumns}, 1fr);`}>
 			{
 				projects.map((project) => (
 					<a href={`/projects/${project.slug}/`} class="project-card-link">

@@ -10,7 +10,13 @@
             "Cost Optimization",
             "Data Engineering"
         ],
-        "heroImage": "/images/blog-placeholder-1.jpg",
+        "heroImage": "/images/img1.jpeg",
+        "heroImageStyle": {
+            "width": "10%",
+            "maxHeight": "400px",
+            "objectFit": "cover",
+            "borderRadius": "16px"
+        },
         "sections": [
             {
                 "content": [
@@ -74,7 +80,7 @@
             "Cost Optimization",
             "Data Engineering"
         ],
-        "heroImage": "/images/blog-placeholder-1.jpg",
+        "heroImage": "/images/img1.jpeg",
         "sections": [
             {
                 "content": [
@@ -138,7 +144,7 @@
             "Cost Optimization",
             "Data Engineering"
         ],
-        "heroImage": "/images/blog-placeholder-1.jpg",
+        "heroImage": "/images/img1.jpeg",
         "sections": [
             {
                 "content": [

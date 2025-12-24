@@ -1,25 +1,50 @@
 ---
 import siteData from '../data/site.json';
 const today = new Date();
+import contactData from '../data/contact.json';
+
+// Simple icon mapping just for the footer if we want icons, or we can use text
+// The design currently uses text links, so we'll stick to text labeled by "label"
 ---
 
 <footer>
   <div class="container footer-content">
     <p>&copy; {today.getFullYear()} {siteData.name}. All rights reserved.</p>
     <div class="social-links">
-      <a href={siteData.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href={siteData.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      {contactData.contactMethods.filter(m => m.url).map(method => (
+        <a href={method.url} target={method.icon !== 'mail' ? "_blank" : "_self"} rel="noopener noreferrer">
+          {method.label}
+        </a>
+      ))}
     </div>
   </div>
 </footer>
 
 <style>
   footer {
-    padding: var(--space-lg) 0;
+    height: var(--footer-height);
+    padding: 0;
     border-top: 1px solid var(--color-border);
-    margin-top: auto; /* Push to bottom */
+    /* Fixed positioning to stick to bottom */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+  }
+  @media (prefers-color-scheme: dark) {
+    footer {
+      background-color: rgba(15, 23, 42, 0.9);
+    }
   }
   .footer-content {
+    width: 100%; /* Ensure container takes full width inside flex parent */
     display: flex;
     justify-content: space-between;
     align-items: center;

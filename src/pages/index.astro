@@ -3,9 +3,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import homeData from '../data/home.json';
 import siteData from '../data/site.json';
+import projectsData from '../data/projects.json';
+import blogData from '../data/blog.json';
+import themeData from '../data/theme.json';
 
 const pageTitle = `${siteData.name} | Senior Data Engineer`;
-const { summary, services_preview } = homeData;
+const { summary, services_preview, projects_section, blog_section, skills_section } = homeData;
+
+// Helper to get featured or recent items
+const getFeaturedItems = (data, sectionConfig, limit = 2) => {
+    if (sectionConfig?.featured_slugs?.length > 0) {
+        return sectionConfig.featured_slugs
+            .map(slug => data.find(item => item.slug === slug))
+            .filter(Boolean);
+    }
+    return data
+        .sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf())
+        .slice(0, limit);
+};
+
+const recentProjects = getFeaturedItems(projectsData, projects_section);
+const recentPosts = getFeaturedItems(blogData, blog_section);
 ---
 
 <BaseLayout title={pageTitle}>
@@ -23,7 +41,10 @@ const { summary, services_preview } = homeData;
   </section>
 
   <section class="container mt-8 mb-8">
-    <h3 class="section-title">{services_preview.title}</h3>
+    <div class="section-header">
+        <h3 class="section-title">{services_preview.title}</h3>
+        <a href={services_preview.link.url} class="link-arrow desktop-only">{services_preview.link.text}</a>
+    </div>
     <p>
       {services_preview.description}
     </p>
@@ -32,9 +53,83 @@ const { summary, services_preview } = homeData;
             <li>{item}</li>
         ))}
     </ul>
-    <div class="mt-8">
+    <div class="mt-4 mobile-only">
         <a href={services_preview.link.url} class="link-arrow">{services_preview.link.text}</a>
     </div>
+  </section>
+
+  {/* Projects Preview */}
+  <section class="container mt-8 mb-8">
+      <div class="section-header">
+        <h3 class="section-title">{projects_section.title}</h3>
+        <a href={projects_section.link.url} class="link-arrow desktop-only">{projects_section.link.text}</a>
+      </div>
+      
+      <div class="project-grid" style={`grid-template-columns: repeat(${themeData.layout.grid?.projectColumns || 2}, 1fr);`}>
+        {recentProjects.map(project => (
+            <a href={`/projects/${project.slug}/`} class="project-card-link">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="title">{project.title}</h3>
+                        <div class="meta">
+                            <span class="company">{project.company}</span>
+                        </div>
+                        <p class="description">{project.description}</p>
+                    </div>
+                </div>
+            </a>
+        ))}
+      </div>
+       <div class="mt-4 mobile-only">
+        <a href={projects_section.link.url} class="link-arrow">{projects_section.link.text}</a>
+      </div>
+  </section>
+
+  {/* Blog Preview */}
+  <section class="container mt-8 mb-8">
+      <div class="section-header">
+        <h3 class="section-title">{blog_section.title}</h3>
+        <a href={blog_section.link.url} class="link-arrow desktop-only">{blog_section.link.text}</a>
+      </div>
+
+       <div class="project-grid" style={`grid-template-columns: repeat(${themeData.layout.grid?.blogColumns || 3}, 1fr);`}>
+        {recentPosts.map(post => (
+             <a href={`/blog/${post.slug}/`} class="project-card-link">
+                <div class="project-card">
+                    {post.heroImage && <img src={post.heroImage} alt={post.title} class="card-image" />}
+                    <div class="project-content">
+                        <h3 class="title">{post.title}</h3>
+                         <div class="meta">
+                            <span class="date">
+                                {new Date(post.pubDate).toLocaleDateString('en-us', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
+                                })}
+                            </span>
+                        </div>
+                        <p class="description">{post.description}</p>
+                    </div>
+                </div>
+            </a>
+        ))}
+      </div>
+      <div class="mt-4 mobile-only">
+        <a href={blog_section.link.url} class="link-arrow">{blog_section.link.text}</a>
+      </div>
+  </section>
+
+  {/* Skills Link Section */}
+  <section class="container mt-8 mb-8">
+      <div class="section-header">
+        <h3 class="section-title">{skills_section?.title}</h3>
+        <a href={skills_section?.link.url} class="link-arrow">{skills_section?.link.text}</a>
+      </div>
+      <div class="skills-preview">
+        {skills_section?.items?.map(skill => (
+            <span class="skill-tag">{skill}</span>
+        ))}
+      </div>
   </section>
 </BaseLayout>
 
@@ -67,5 +162,42 @@ const { summary, services_preview } = homeData;
   }
   .link-arrow {
     font-weight: 600;
+  }
+  .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-md);
+  }
+  .card-image {
+      width: 100%;
+      height: 160px; /* Slightly smaller for home page */
+      object-fit: cover;
+      border-bottom: 1px solid var(--color-border);
+  }
+  .mobile-only { display: none; }
+  
+  @media (max-width: 640px) {
+      .desktop-only { display: none; }
+      .mobile-only { display: block; }
+  }
+  .skills-cta {
+      padding: var(--space-lg);
+      background: var(--color-bg-secondary);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+  }
+  .skills-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+  }
+  .skill-tag {
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px; /* Pill shape */
+      font-size: 0.95rem;
+      color: var(--color-text-main);
   }
 </style>
