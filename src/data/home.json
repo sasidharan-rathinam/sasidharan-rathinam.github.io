@@ -53,8 +53,8 @@
     "blog_section": {
         "title": "Latest Articles",
         "featured_slugs": [
-            "optimizing-redshift",
-            "optimizing-redshift"
+            "spark-driver-bottleneck",
+            "hidden-cost-of-bad-data-modeling"
         ],
         "link": {
             "text": "Read all posts \u2192",
