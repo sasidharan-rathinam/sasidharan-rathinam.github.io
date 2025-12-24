@@ -3,45 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "Skills & Tech Stack | Sasi Rathinam";
 
-const skills = {
-  "Data Engineering": [
-    "ETL / ELT Pipelines",
-    "Batch & Streaming Processing",
-    "Data Modeling (OLTP, OLAP, Star/Snowflake)",
-    "Bronze-Silver-Gold Architecture"
-  ],
-  "Databases & Storage": [
-    "PostgreSQL",
-    "MySQL",
-    "BigQuery",
-    "Redshift",
-    "Snowflake",
-    "AWS S3",
-    "Google Cloud Storage",
-    "Data Lakes"
-  ],
-  "Big Data & Processing": [
-    "Apache Spark",
-    "Apache Airflow",
-    "AWS Glue",
-    "dbt (Data Build Tool)",
-    "Kafka"
-  ],
-  "Cloud & DevOps": [
-    "AWS (Lambda, EMR, Redshift, Glue)",
-    "GCP (BigQuery, Dataflow, Cloud Composer)",
-    "Docker",
-    "CI/CD (GitHub Actions, GitLab CI)",
-    "Terraform",
-    "IAM & Security"
-  ],
-  "Languages": [
-    "Python (Expert)",
-    "SQL (Expert)",
-    "Scala",
-    "Shell Scripting"
-  ]
-};
+import skills from '../data/skills.json';
 ---
 
 <BaseLayout title={pageTitle}>

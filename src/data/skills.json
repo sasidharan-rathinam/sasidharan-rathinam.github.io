@@ -1,0 +1,39 @@
+{
+    "Data Engineering": [
+        "ETL / ELT Pipelines",
+        "Batch & Streaming Processing",
+        "Data Modeling (OLTP, OLAP, Star/Snowflake)",
+        "Bronze-Silver-Gold Architecture"
+    ],
+    "Databases & Storage": [
+        "PostgreSQL",
+        "MySQL",
+        "BigQuery",
+        "Redshift",
+        "Snowflake",
+        "AWS S3",
+        "Google Cloud Storage",
+        "Data Lakes111222"
+    ],
+    "Big Data & Processing": [
+        "Apache Spark",
+        "Apache Airflow",
+        "AWS Glue",
+        "dbt (Data Build Tool)",
+        "Kafka"
+    ],
+    "Cloud & DevOps": [
+        "AWS (Lambda, EMR, Redshift, Glue)",
+        "GCP (BigQuery, Dataflow, Cloud Composer)",
+        "Docker",
+        "CI/CD (GitHub Actions, GitLab CI)",
+        "Terraform",
+        "IAM & Security"
+    ],
+    "Languages": [
+        "Python (Expert)",
+        "SQL (Expert)",
+        "Scala",
+        "Shell Scripting"
+    ]
+}
